@@ -14,20 +14,20 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchSubmit }) => {
   };
 
   return (
-    <div className="col-span-3 p-4 text-center">
+    <div className="col-span-3 text-center">
       {/* Search Bar */}
-      <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+      <form onSubmit={handleSubmit} className="flex items-center justify-center space-x-4">
         <div className="relative flex items-center">
           <input
             type="text"
             placeholder="Search..."
-            className="rounded-md px-4 py-2 outline-none focus:border-blue-500 transition duration-300 bg-slate-600"
+            className="rounded-md px-4 py-2 outline-none focus:border-blue-500 transition duration-300 placeholder-neutral-500"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-slate-600 text-white hover:animate-pulse rounded-md ml-2 cursor-pointer"
+            className="px-4 py-2 bg-white text-black hover:animate-pulse rounded-md ml-2 cursor-pointer"
           >
             →
           </button>
