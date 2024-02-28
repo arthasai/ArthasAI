@@ -1,10 +1,11 @@
 // Home.tsx
-'use client';
+"use client";
 
 // Home.tsx
 import React from "react";
 import Link from "next/link";
 import SearchBar from "./components/Searchbar"; // Adjust the import path based on your project structure
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
   const handleSearchSubmit = (query: string) => {
@@ -16,7 +17,6 @@ const Home = () => {
     <div className="flex items-center justify-center min-h-screen">
       {/* Main Content */}
       <div className="max-w-xs grid grid-cols-3 gap-4">
-        
         <div className="col-span-3 text-center">
           {/* Logo */}
           Logo
