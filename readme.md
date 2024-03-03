@@ -37,3 +37,6 @@ The main objectives of this project are to learn the following:
 - We will be learning about language models and the transformer architecture (if there is a use for it possible Graph Neural Networks as well).
 - How to crawl the web to get information about website links and keep this information up to date.
 - How to create a backend in Python using FastAPI.
+
+## System Designs
+![image info](./Arthas_AI_Diagrams.png)
