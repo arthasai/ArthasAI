@@ -1,8 +1,16 @@
 import { updateSession } from "./utils/supabase/middleware";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+
+const protectedRoutes = ["/documents/"];
 
 export async function middleware(request: NextRequest) {
-  //return await updateSession(request);
+  let session = request.cookies.get("supabaseSession");
+
+  if (!session && protectedRoutes.includes(request.nextUrl.pathname)) {
+    const absoluteURL = new URL("/", request.nextUrl.origin);
+    return NextResponse.redirect(absoluteURL.toString());
+  }
+  return await updateSession(request);
 }
 
 export const config = {

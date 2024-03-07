@@ -1,15 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { BlockNoteView, useCreateBlockNote } from "@blocknote/react";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/react/style.css";
+import { PartialBlock } from "@blocknote/core";
 
-// Our <Editor> component we can reuse later
 export default function Editor() {
-  // Renders the editor instance using a React component.
+  const [blocks, setBlocks] = useState<PartialBlock[]>([]);
+
   const editor = useCreateBlockNote({});
 
-  return <BlockNoteView editor={editor} theme="light" />;
+  useEffect(() => {
+    console.log(blocks);
+  }, [blocks]);
+
+  return (
+    <BlockNoteView
+      editor={editor}
+      theme="light"
+      onChange={() => {
+        setBlocks(editor.document);
+      }}
+    />
+  );
 }

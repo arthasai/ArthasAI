@@ -9,12 +9,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { ImperativePanelHandle, collapsePanel } from "../utils";
 import { BlockNoteView, useCreateBlockNote } from "@blocknote/react";
-import Editor from "./editor";
+
+import { PartialBlock } from "@blocknote/core";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("./editor"), { ssr: false });
 
 function DocumentEditor() {
   const rightPanelRef = useRef<ImperativePanelHandle>(null);
-
-  const editor = useCreateBlockNote();
 
   const handleCollapseRightPanel = () => {
     collapsePanel(rightPanelRef.current);
@@ -23,7 +25,7 @@ function DocumentEditor() {
   return (
     <div className="h-screen w-screen">
       <ResizablePanelGroup direction="horizontal" className="h-full">
-        <ResizablePanel id="reader" className="w-full">
+        <ResizablePanel id="reader" className="w-full" defaultSize={50}>
           Document
           <Button onClick={handleCollapseRightPanel}>Collapse</Button>
         </ResizablePanel>
@@ -32,6 +34,7 @@ function DocumentEditor() {
           id="right-panel"
           className="w-full"
           collapsible
+          defaultSize={50}
           minSize={30}
           maxSize={60}
           ref={rightPanelRef}
