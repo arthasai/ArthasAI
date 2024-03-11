@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { ImperativePanelHandle, collapsePanel } from "../utils";
 import { BlockNoteView, useCreateBlockNote } from "@blocknote/react";
-
 import { PartialBlock } from "@blocknote/core";
 import dynamic from "next/dynamic";
 

@@ -74,3 +74,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /*chrome safari and opera no scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* ie and edge */
+    scrollbar-width: none; /* firefox */
+  }
+}
