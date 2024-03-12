@@ -11,38 +11,23 @@ import { ImperativePanelHandle, collapsePanel } from "../utils";
 
 import dynamic from "next/dynamic";
 import useSWR from "swr";
-import { createClient } from "@/app/utils/supabase/client";
-import { Settings, PanelTopOpen } from "lucide-react";
+import { Settings, PanelTopOpen, ChevronLeft, ArrowRight } from "lucide-react";
 
 const Editor = dynamic(() => import("./editor"), { ssr: false });
 const Flow = dynamic(() => import("./graphs/graphs"), { ssr: false });
-
-const supabase = createClient();
 
 const fetcher = (...args: Parameters<typeof fetch>) =>
   fetch(...args).then((res) => res.json());
 
 function DocumentEditor({ params }: { params: { doc: string } }) {
-  const { data, error, isLoading } = useSWR("/document/as/api", fetcher);
-  const [toggleGroupValue, setToggleGroupValue] = useState<string[]>();
+  const { data, error, isLoading, mutate, isValidating } = useSWR(
+    `/document/${params.doc}/api`,
+    fetcher
+  );
 
-  useEffect(() => {
-    if (toggleGroupValue?.includes("bot-visible")) {
-      collapsePanel(chatbotRef.current);
-    } else {
-      collapsePanel(chatbotRef.current);
-    }
-
-    if (toggleGroupValue?.includes("node-visible")) {
-      collapsePanel(nodegraphRef.current);
-    } else {
-      collapsePanel(nodegraphRef.current);
-    }
-  }, [toggleGroupValue]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const refetchData = () => {
+    mutate(`/document/${params.doc}/api`);
+  };
 
   const readerRef = useRef<ImperativePanelHandle>(null);
   const notesRef = useRef<ImperativePanelHandle>(null);
@@ -57,13 +42,18 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
     <div className="h-screen w-screen">
       <ResizablePanelGroup direction="horizontal" className="h-full">
         <ResizablePanel id="reader" className="w-full" defaultSize={50}>
-          <Button
-            onClick={async () => {
-              handleCollapse(readerRef);
-            }}
-          >
-            Collapse
-          </Button>
+          <div id="top-reader" className="flex justify-between p-4">
+            <Button variant="outline">
+              <ChevronLeft />
+            </Button>
+            <Button
+              onClick={() => {
+                handleCollapse(readerRef);
+              }}
+            >
+              <ArrowRight />
+            </Button>
+          </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel
