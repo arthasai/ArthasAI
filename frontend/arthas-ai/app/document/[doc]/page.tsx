@@ -8,26 +8,35 @@ import {
 } from "@/components/ui/resizable";
 import { Button } from "@/components/ui/button";
 import { ImperativePanelHandle, collapsePanel } from "../utils";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 import dynamic from "next/dynamic";
-import useSWR from "swr";
 import { Settings, PanelTopOpen, ChevronLeft, ArrowRight } from "lucide-react";
+import { Toaster } from "@/components/ui/toaster";
 
 const Editor = dynamic(() => import("./editor"), { ssr: false });
-const Flow = dynamic(() => import("./graphs/graphs"), { ssr: false });
-
-const fetcher = (...args: Parameters<typeof fetch>) =>
-  fetch(...args).then((res) => res.json());
+const Flow = dynamic(() => import("./graphs"), { ssr: false });
 
 function DocumentEditor({ params }: { params: { doc: string } }) {
-  const { data, error, isLoading, mutate, isValidating } = useSWR(
-    `/document/${params.doc}/api`,
-    fetcher
-  );
+  const fetcher = useQuery({
+    queryKey: [`/document/${params.doc}/api`],
+    queryFn: async () => {
+      // TODO: Fetch all document information
+      try {
+        const res = await fetch(`/document/${params.doc}/api`);
+        return res.json();
+      } catch (error) {
+        throw error;
+      }
+    },
+  });
 
-  const refetchData = () => {
-    mutate(`/document/${params.doc}/api`);
-  };
+  const mutator = useMutation({
+    mutationKey: ["document", "update"],
+    mutationFn: async () => {
+      // TODO: Create function to update document
+    },
+  });
 
   const readerRef = useRef<ImperativePanelHandle>(null);
   const notesRef = useRef<ImperativePanelHandle>(null);
@@ -40,6 +49,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
 
   return (
     <div className="h-screen w-screen">
+      <Toaster />
       <ResizablePanelGroup direction="horizontal" className="h-full">
         <ResizablePanel id="reader" className="w-full" defaultSize={50}>
           <div id="top-reader" className="flex justify-between p-4">
@@ -82,7 +92,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
                   </Button>
                 </div>
               </div>
-              <Editor />
+              <Editor params={params} />
             </ResizablePanel>
             <ResizableHandle withHandle />
             <div className="w-full p-2 flex justify-between items-center">
@@ -128,7 +138,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
               defaultSize={60}
               ref={nodegraphRef}
             >
-              <Flow />
+              <Flow params={params} />
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

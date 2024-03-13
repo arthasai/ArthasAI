@@ -1,5 +1,7 @@
 "use client";
 
+import { toast } from "@/components/ui/use-toast";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
 import ReactFlow, {
   MiniMap,
@@ -24,7 +26,7 @@ const initialEdges = [
   { id: "e1-3", source: "1", target: "3" },
 ];
 
-function Flow() {
+function Flow({ params }: { params: { doc: string } }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -32,6 +34,38 @@ function Flow() {
     (params: any) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
+
+  const fetching = useQuery({
+    queryKey: [`/document/${params.doc}/editor/api/fetch`],
+    queryFn: async () => {
+      try {
+        // TODO Fetch all document information via supabase
+      } catch (error) {
+        toast({
+          title: "Error!",
+          description: `Error Message: ${error}. \n Refresh to try again.`,
+          variant: "destructive",
+        });
+        throw error;
+      }
+    },
+  });
+
+  const update = useMutation({
+    mutationKey: [`/document/${params.doc}/editor/api/update`],
+    mutationFn: async () => {
+      try {
+        // TODO modify function to update document via supabase
+      } catch (error) {
+        toast({
+          title: "Error!",
+          description: `Error Message: ${error}. \n Refresh to try again.`,
+          variant: "destructive",
+        });
+        throw error;
+      }
+    },
+  });
 
   return (
     <ReactFlow
