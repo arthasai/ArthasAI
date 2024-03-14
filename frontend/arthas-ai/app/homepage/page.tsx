@@ -14,14 +14,22 @@ import eye from "./eye.png";
 import eyeOff from "./eyeOff.png";
 
 const LoginRoute = () => {
-	const [isRegister, setIsRegister] = useState(false);
+	const [isView, setIsView] = useState("Login");
 	return (
 		<div className="">
-			{isRegister ? (
+			{isView === "ForgotPassword" ? (
+				<ForgotPasswordComp setIsView={setIsView} />
+			) : isView === "SignUp" ? (
+				<SignUpComp setIsView={setIsView} />
+			) : (
+				<LoginComp setIsView={setIsView} />
+			)}
+
+			{/* {isRegister === "Login" ? (
 				<SignUpComp setIsRegister={setIsRegister} />
 			) : (
 				<LoginComp setIsRegister={setIsRegister} />
-			)}
+			)} */}
 		</div>
 	);
 };
@@ -77,7 +85,7 @@ const LoginComp = (props: any) => {
 			<h2 className="text-3xl pt-12">Welcome!</h2>
 			<h3 className="text-dashLinkText text-sm pt-2">
 				New Here? Join others by{" "}
-				<button className="underline" onClick={() => props.setIsRegister(true)}>
+				<button className="underline" onClick={() => props.setIsView("SignUp")}>
 					creating an account
 				</button>
 				.
@@ -121,7 +129,9 @@ const LoginComp = (props: any) => {
 				</div>
 			</form>
 			<div className="block w-full text-right mt-4">
-				<button className="text-dashInputColor text-sm underline">
+				<button
+					className="text-dashInputColor text-sm underline"
+					onClick={() => props.setIsView("ForgotPassword")}>
 					Forgot Password
 				</button>
 			</div>
@@ -154,9 +164,7 @@ const SignUpComp = (props: any) => {
 			<h2 className="text-3xl pt-12">Get Started...</h2>
 			<h3 className="text-dashLinkText text-sm pt-2">
 				Forgot your a member?{" "}
-				<button
-					className="underline"
-					onClick={() => props.setIsRegister(false)}>
+				<button className="underline" onClick={() => props.setIsView("Login")}>
 					Login
 				</button>{" "}
 				with your credentials.
@@ -212,6 +220,37 @@ const SignUpComp = (props: any) => {
 			<div className="block w-full mt-12">
 				<button className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6">
 					Sign Up
+				</button>
+			</div>
+		</div>
+	);
+};
+
+const ForgotPasswordComp = (props: any) => {
+	return (
+		<div>
+			<h2 className="text-3xl pt-12">Forgot Password?</h2>
+			<h3 className="text-dashLinkText text-sm pt-2">
+				No worries! Just enter your email and we'll send you a reset link.
+			</h3>
+			<div className="mt-12"></div>
+			<div>
+				<label
+					htmlFor="email"
+					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
+					Email
+				</label>
+				<input
+					type="email"
+					required
+					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+				/>
+			</div>
+			<div className="block w-full mt-12">
+				<button
+					className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6"
+					onClick={() => props.setIsView("Login")}>
+					Reset Password
 				</button>
 			</div>
 		</div>
