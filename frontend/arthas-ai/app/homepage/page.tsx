@@ -34,11 +34,22 @@ const LoginRoute = () => {
 	);
 };
 
+const ErrorNotification = (props: { errorMessage: string }) => {
+	return (
+		<div>
+			<p className="border-l-2 border-red-500 pl-2 text-dashInputColor text-sm text-left">
+				{props.errorMessage}
+			</p>
+		</div>
+	);
+};
+
 const LoginComp = (props: any) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [emailError, setEmailError] = useState(false);
 	const [passwordError, setPasswordError] = useState(false);
+	const [loginError, setLoginError] = useState(true);
 	const [type, setType] = useState("password");
 	const [icon, setIcon] = useState(eyeOff);
 
@@ -63,6 +74,13 @@ const LoginComp = (props: any) => {
 			setPasswordError(true);
 		} else {
 			setPasswordError(false);
+		}
+
+		if (emailError && passwordError) {
+			//do something with supabase
+			if (loginError) {
+				setLoginError(true);
+			}
 		}
 	};
 
@@ -123,12 +141,19 @@ const LoginComp = (props: any) => {
 					</div>
 				</div>
 			</form>
-			<div className="block w-full text-right mt-4">
-				<button
-					className="text-dashInputColor text-sm underline"
-					onClick={() => props.setIsView("ForgotPassword")}>
-					Forgot Password
-				</button>
+			<div className="w-full mt-4">
+				<div className="inline-block w-1/2 text-left">
+					{loginError && (
+						<ErrorNotification errorMessage="Enter valid credentials" />
+					)}
+				</div>
+				<div className="inline-block w-1/2 text-right">
+					<button
+						className="text-dashInputColor text-sm underline"
+						onClick={() => props.setIsView("ForgotPassword")}>
+						Forgot Password
+					</button>
+				</div>
 			</div>
 			<div className="block w-full mt-4">
 				<button
@@ -146,6 +171,7 @@ const SignUpComp = (props: any) => {
 	const [password, setPassword] = useState("");
 	const [emailError, setEmailError] = useState(false);
 	const [passwordError, setPasswordError] = useState(false);
+	const [signUpError, setSignUpError] = useState(false);
 	const [type, setType] = useState("password");
 	const [icon, setIcon] = useState(eyeOff);
 
@@ -170,6 +196,13 @@ const SignUpComp = (props: any) => {
 			setPasswordError(true);
 		} else {
 			setPasswordError(false);
+		}
+
+		if (emailError && passwordError) {
+			//do something with supabase
+			if (signUpError) {
+				setSignUpError(true);
+			}
 		}
 	};
 
@@ -228,7 +261,12 @@ const SignUpComp = (props: any) => {
 					</div>
 				</div>
 			</form>
-			<div className="block w-full mt-12">
+			<div className="w-full text-left mt-4">
+				{signUpError && (
+					<ErrorNotification errorMessage="Enter valid credentials" />
+				)}
+			</div>
+			<div className={`block w-full ${signUpError ? "mt-6" : "mt-12"}`}>
 				<button
 					className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6"
 					onClick={handleSignUp}>
