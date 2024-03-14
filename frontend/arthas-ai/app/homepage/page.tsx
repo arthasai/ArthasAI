@@ -29,6 +29,18 @@ const LoginRoute = () => {
 const LoginComp = (props: any) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [type, setType] = useState("password");
+	const [icon, setIcon] = useState(eyeOff);
+
+	const handleToggle = () => {
+		if (type === "password") {
+			setIcon(eye);
+			setType("text");
+		} else {
+			setIcon(eyeOff);
+			setType("password");
+		}
+	};
 
 	const form = useForm<z.infer<typeof loginSchema>>({
 		resolver: zodResolver(loginSchema),
@@ -92,13 +104,20 @@ const LoginComp = (props: any) => {
 						className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
 						Password
 					</label>
-					<input
-						id="password"
-						name="password"
-						type="password"
-						required
-						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-					/>
+					<div className="relative flex items-center">
+						<input
+							id="password"
+							name="password"
+							type={type}
+							onChange={(e) => setPassword(e.target.value)}
+							autoComplete="current-password"
+							required
+							className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						<span className="absolute right-0 mr-2" onClick={handleToggle}>
+							<Image src={icon} alt="test" height={20} width={20} />
+						</span>
+					</div>
 				</div>
 			</form>
 			<div className="block w-full text-right mt-4">
@@ -187,7 +206,6 @@ const SignUpComp = (props: any) => {
 					/>
 					<span className="absolute right-0 mr-2" onClick={handleToggle}>
 						<Image src={icon} alt="test" height={20} width={20} />
-						{/* <img src="./eye.svg" /> */}
 					</span>
 				</div>
 			</div>
