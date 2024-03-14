@@ -9,15 +9,18 @@ const LoginRoute = () => {
 	return (
 		<div className="">
 			{isRegister ? (
-				<SignUp setIsRegister={setIsRegister} />
+				<SignUpComp setIsRegister={setIsRegister} />
 			) : (
-				<Login setIsRegister={setIsRegister} />
+				<LoginComp setIsRegister={setIsRegister} />
 			)}
 		</div>
 	);
 };
 
-const Login = (props: any) => {
+const LoginComp = (props: any) => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
 	return (
 		<div className="">
 			<h2 className="text-3xl pt-12">Welcome!</h2>
@@ -29,32 +32,36 @@ const Login = (props: any) => {
 				.
 			</h3>
 			<div className="mt-12"></div>
-			<div>
-				<label
-					htmlFor="email"
-					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
-					Email
-				</label>
-				<input
-					type="email"
-					required
-					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-				/>
-			</div>
-			<div className="mt-6">
-				<label
-					htmlFor="password"
-					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
-					Password
-				</label>
-				<input
-					id="password"
-					name="password"
-					type="password"
-					required
-					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-				/>
-			</div>
+			<form>
+				<div>
+					<label
+						htmlFor="email"
+						className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
+						Email
+					</label>
+					<input
+						type="email"
+						name="email"
+						id="email"
+						required
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+					/>
+				</div>
+				<div className="mt-6">
+					<label
+						htmlFor="password"
+						className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
+						Password
+					</label>
+					<input
+						id="password"
+						name="password"
+						type="password"
+						required
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+					/>
+				</div>
+			</form>
 			<div className="block w-full text-right mt-4">
 				<button className="text-dashInputColor text-sm underline">
 					Forgot Password
@@ -69,7 +76,7 @@ const Login = (props: any) => {
 	);
 };
 
-const SignUp = (props: any) => {
+const SignUpComp = (props: any) => {
 	return (
 		<div className="">
 			<h2 className="text-3xl pt-12">Get Started...</h2>
