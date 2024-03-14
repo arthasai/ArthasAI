@@ -37,6 +37,8 @@ const LoginRoute = () => {
 const LoginComp = (props: any) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [emailError, setEmailError] = useState(false);
+	const [passwordError, setPasswordError] = useState(false);
 	const [type, setType] = useState("password");
 	const [icon, setIcon] = useState(eyeOff);
 
@@ -50,34 +52,18 @@ const LoginComp = (props: any) => {
 		}
 	};
 
-	const form = useForm<z.infer<typeof loginSchema>>({
-		resolver: zodResolver(loginSchema),
-		defaultValues: {
-			email: "",
-			password: "",
-		},
-		values: {
-			email: "",
-			password: "",
-		},
-	});
+	const handleLogin = () => {
+		if (!email.includes("@")) {
+			setEmailError(true);
+		} else {
+			setEmailError(false);
+		}
 
-	const supabase = createClient();
-
-	const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-		console.log(data);
-		await supabase.auth
-			.signInWithPassword({
-				email: data.email,
-				password: data.password,
-			})
-			.then((response) => {
-				if (response.error) {
-					console.log(response.error);
-				} else {
-					navigate();
-				}
-			});
+		if (password.length < 8) {
+			setPasswordError(true);
+		} else {
+			setPasswordError(false);
+		}
 	};
 
 	return (
@@ -95,7 +81,9 @@ const LoginComp = (props: any) => {
 				<div>
 					<label
 						htmlFor="email"
-						className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
+						className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
+							emailError ? "text-red-500" : "text-dashInputColor"
+						}`}>
 						Email
 					</label>
 					<input
@@ -103,13 +91,18 @@ const LoginComp = (props: any) => {
 						name="email"
 						id="email"
 						required
-						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+							emailError ? "ring-red-500" : ""
+						}`}
+						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</div>
 				<div className="mt-6">
 					<label
 						htmlFor="password"
-						className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
+						className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
+							passwordError ? "text-red-500" : "text-dashInputColor"
+						}`}>
 						Password
 					</label>
 					<div className="relative flex items-center">
@@ -120,7 +113,9 @@ const LoginComp = (props: any) => {
 							onChange={(e) => setPassword(e.target.value)}
 							autoComplete="current-password"
 							required
-							className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+								passwordError ? "ring-red-500" : ""
+							}`}
 						/>
 						<span className="absolute right-0 mr-2" onClick={handleToggle}>
 							<Image src={icon} alt="test" height={20} width={20} />
@@ -136,7 +131,9 @@ const LoginComp = (props: any) => {
 				</button>
 			</div>
 			<div className="block w-full mt-4">
-				<button className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6">
+				<button
+					className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6"
+					onClick={handleLogin}>
 					Login
 				</button>
 			</div>
@@ -145,7 +142,10 @@ const LoginComp = (props: any) => {
 };
 
 const SignUpComp = (props: any) => {
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [emailError, setEmailError] = useState(false);
+	const [passwordError, setPasswordError] = useState(false);
 	const [type, setType] = useState("password");
 	const [icon, setIcon] = useState(eyeOff);
 
@@ -156,6 +156,20 @@ const SignUpComp = (props: any) => {
 		} else {
 			setIcon(eyeOff);
 			setType("password");
+		}
+	};
+
+	const handleSignUp = () => {
+		if (!email.includes("@")) {
+			setEmailError(true);
+		} else {
+			setEmailError(false);
+		}
+
+		if (password.length < 8) {
+			setPasswordError(true);
+		} else {
+			setPasswordError(false);
 		}
 	};
 
@@ -170,55 +184,54 @@ const SignUpComp = (props: any) => {
 				with your credentials.
 			</h3>
 			<div className="mt-12"></div>
-			{/* <div>
-				<label
-					htmlFor="name"
-					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
-					Name
-				</label>
-				<input
-					id="name"
-					name="name"
-					type="text"
-					required
-					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-				/>
-			</div> */}
-			<div className="mt-6">
-				<label
-					htmlFor="email"
-					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
-					Email
-				</label>
-				<input
-					type="email"
-					required
-					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-				/>
-			</div>
-			<div className="mt-6">
-				<label
-					htmlFor="password"
-					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
-					Password
-				</label>
-				<div className="relative flex items-center">
+			<form>
+				<div className="mt-6">
+					<label
+						htmlFor="email"
+						className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
+							emailError ? "text-red-500" : "text-dashInputColor"
+						}`}>
+						Email
+					</label>
 					<input
-						id="password"
-						name="password"
-						type={type}
-						onChange={(e) => setPassword(e.target.value)}
-						autoComplete="current-password"
+						type="email"
 						required
-						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						onChange={(e) => setEmail(e.target.value)}
+						className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+							emailError ? "ring-red-500" : ""
+						}`}
 					/>
-					<span className="absolute right-0 mr-2" onClick={handleToggle}>
-						<Image src={icon} alt="test" height={20} width={20} />
-					</span>
 				</div>
-			</div>
+				<div className="mt-6">
+					<label
+						htmlFor="password"
+						className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
+							passwordError ? "text-red-500" : "text-dashInputColor"
+						}`}>
+						Password
+					</label>
+					<div className="relative flex items-center">
+						<input
+							id="password"
+							name="password"
+							type={type}
+							onChange={(e) => setPassword(e.target.value)}
+							autoComplete="current-password"
+							required
+							className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+								passwordError ? "ring-red-500" : ""
+							}`}
+						/>
+						<span className="absolute right-0 mr-2" onClick={handleToggle}>
+							<Image src={icon} alt="test" height={20} width={20} />
+						</span>
+					</div>
+				</div>
+			</form>
 			<div className="block w-full mt-12">
-				<button className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6">
+				<button
+					className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6"
+					onClick={handleSignUp}>
 					Sign Up
 				</button>
 			</div>
@@ -227,6 +240,17 @@ const SignUpComp = (props: any) => {
 };
 
 const ForgotPasswordComp = (props: any) => {
+	const [email, setEmail] = useState("");
+	const [emailError, setEmailError] = useState(false);
+
+	const handleEmail = () => {
+		if (!email.includes("@")) {
+			setEmailError(true);
+		} else {
+			setEmailError(false);
+			props.setIsView("Login");
+		}
+	};
 	return (
 		<div>
 			<h2 className="text-3xl pt-12">Forgot Password?</h2>
@@ -237,19 +261,25 @@ const ForgotPasswordComp = (props: any) => {
 			<div>
 				<label
 					htmlFor="email"
-					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
+					className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
+						emailError ? "text-red-500" : "text-dashInputColor"
+					}`}>
 					Email
 				</label>
 				<input
 					type="email"
 					required
-					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+					onChange={(e) => setEmail(e.target.value)}
+					className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+						emailError ? "ring-red-500" : ""
+					}`}
 				/>
 			</div>
 			<div className="block w-full mt-12">
 				<button
 					className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6"
-					onClick={() => props.setIsView("Login")}>
+					onClick={handleEmail}>
+					{/* onClick={() => props.setIsView("Login")} */}
 					Reset Password
 				</button>
 			</div>
