@@ -1,8 +1,17 @@
 // Resources.tsx
 "use client";
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { set, z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createClient } from "../utils/supabase/client";
+import { loginSchema } from "../utils/forms/zodTypes";
+import { navigate } from "./actions";
+import { useForm } from "react-hook-form";
+import eye from "./eye.png";
+import eyeOff from "./eyeOff.png";
 
 const LoginRoute = () => {
 	const [isRegister, setIsRegister] = useState(false);
@@ -20,6 +29,36 @@ const LoginRoute = () => {
 const LoginComp = (props: any) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+
+	const form = useForm<z.infer<typeof loginSchema>>({
+		resolver: zodResolver(loginSchema),
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+		values: {
+			email: "",
+			password: "",
+		},
+	});
+
+	const supabase = createClient();
+
+	const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+		console.log(data);
+		await supabase.auth
+			.signInWithPassword({
+				email: data.email,
+				password: data.password,
+			})
+			.then((response) => {
+				if (response.error) {
+					console.log(response.error);
+				} else {
+					navigate();
+				}
+			});
+	};
 
 	return (
 		<div className="">
@@ -77,6 +116,20 @@ const LoginComp = (props: any) => {
 };
 
 const SignUpComp = (props: any) => {
+	const [password, setPassword] = useState("");
+	const [type, setType] = useState("password");
+	const [icon, setIcon] = useState(eyeOff);
+
+	const handleToggle = () => {
+		if (type === "password") {
+			setIcon(eye);
+			setType("text");
+		} else {
+			setIcon(eyeOff);
+			setType("password");
+		}
+	};
+
 	return (
 		<div className="">
 			<h2 className="text-3xl pt-12">Get Started...</h2>
@@ -90,7 +143,7 @@ const SignUpComp = (props: any) => {
 				with your credentials.
 			</h3>
 			<div className="mt-12"></div>
-			<div>
+			{/* <div>
 				<label
 					htmlFor="name"
 					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
@@ -103,7 +156,7 @@ const SignUpComp = (props: any) => {
 					required
 					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 				/>
-			</div>
+			</div> */}
 			<div className="mt-6">
 				<label
 					htmlFor="email"
@@ -122,13 +175,21 @@ const SignUpComp = (props: any) => {
 					className="block text-sm font-medium leading-6 text-gray-900 pb-2 text-dashInputColor">
 					Password
 				</label>
-				<input
-					id="password"
-					name="password"
-					type="password"
-					required
-					className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-				/>
+				<div className="relative flex items-center">
+					<input
+						id="password"
+						name="password"
+						type={type}
+						onChange={(e) => setPassword(e.target.value)}
+						autoComplete="current-password"
+						required
+						className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+					/>
+					<span className="absolute right-0 mr-2" onClick={handleToggle}>
+						<Image src={icon} alt="test" height={20} width={20} />
+						{/* <img src="./eye.svg" /> */}
+					</span>
+				</div>
 			</div>
 			<div className="block w-full mt-12">
 				<button className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6">
