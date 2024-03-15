@@ -144,7 +144,7 @@ const LoginComp = (props: any) => {
 			<div className="w-full mt-4">
 				<div className="inline-block w-1/2 text-left">
 					{loginError && (
-						<ErrorNotification errorMessage="Enter valid credentials" />
+						<ErrorNotification errorMessage="Enter valid credentials &#128075;" />
 					)}
 				</div>
 				<div className="inline-block w-1/2 text-right">
@@ -263,7 +263,7 @@ const SignUpComp = (props: any) => {
 			</form>
 			<div className="w-full text-left mt-4">
 				{signUpError && (
-					<ErrorNotification errorMessage="Enter valid credentials" />
+					<ErrorNotification errorMessage="Enter valid credentials &#128075;" />
 				)}
 			</div>
 			<div className={`block w-full ${signUpError ? "mt-6" : "mt-12"}`}>
