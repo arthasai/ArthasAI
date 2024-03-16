@@ -36,34 +36,16 @@ function Flow({ params }: { params: { doc: string } }) {
   );
 
   const fetching = useQuery({
-    queryKey: [`/document/${params.doc}/editor/api/fetch`],
+    queryKey: [`/document/${params.doc}/graphAPI/get`],
     queryFn: async () => {
-      try {
-        // TODO Fetch all document information via supabase
-      } catch (error) {
-        toast({
-          title: "Error!",
-          description: `Error Message: ${error}. \n Refresh to try again.`,
-          variant: "destructive",
-        });
-        throw error;
-      }
+      return { hello: "world" };
     },
   });
 
   const update = useMutation({
     mutationKey: [`/document/${params.doc}/editor/api/update`],
     mutationFn: async () => {
-      try {
-        // TODO modify function to update document via supabase
-      } catch (error) {
-        toast({
-          title: "Error!",
-          description: `Error Message: ${error}. \n Refresh to try again.`,
-          variant: "destructive",
-        });
-        throw error;
-      }
+      return { hello: "world" };
     },
   });
 

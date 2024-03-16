@@ -11,30 +11,31 @@ import { ImperativePanelHandle, collapsePanel } from "../utils";
 import { useQuery, useMutation } from "@tanstack/react-query";
 
 import dynamic from "next/dynamic";
-import { Settings, PanelTopOpen, ChevronLeft, ArrowRight } from "lucide-react";
+import {
+  Settings,
+  PanelTopOpen,
+  ChevronLeft,
+  ArrowRight,
+  ChevronDown,
+} from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 
-const Editor = dynamic(() => import("./editor"), { ssr: false });
+const Editor = dynamic(() => import("./notes"), { ssr: false });
 const Flow = dynamic(() => import("./graphs"), { ssr: false });
 
 function DocumentEditor({ params }: { params: { doc: string } }) {
   const fetcher = useQuery({
-    queryKey: [`/document/${params.doc}/api`],
+    queryKey: [`/document/${params.doc}/documentAPI`],
     queryFn: async () => {
       // TODO: Fetch all document information
-      try {
-        const res = await fetch(`/document/${params.doc}/api`);
-        return res.json();
-      } catch (error) {
-        throw error;
-      }
+      return { hello: "world" };
     },
   });
 
   const mutator = useMutation({
     mutationKey: ["document", "update"],
     mutationFn: async () => {
-      // TODO: Create function to update document
+      return { hello: "world" };
     },
   });
 
@@ -87,7 +88,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
               <div className="w-9/10 h-10 flex justify-between items-center space-x-4 p-8">
                 <div>{"Document Name's Notes"}</div>
                 <div className="flex">
-                  <Button variant="ghost">
+                  <Button variant="ghost" onClick={() => {}}>
                     <Settings />
                   </Button>
                 </div>
@@ -104,7 +105,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
                     handleCollapse(chatbotRef);
                   }}
                 >
-                  <PanelTopOpen />
+                  {/* <ChevronDown /> */}
                 </Button>
               </div>
             </div>
@@ -112,7 +113,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
               id="chatbot"
               collapsible
               minSize={20}
-              defaultSize={60}
+              defaultSize={20}
               ref={chatbotRef}
             >
               Chatbot
@@ -127,7 +128,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
                     handleCollapse(nodegraphRef);
                   }}
                 >
-                  <PanelTopOpen />
+                  {/* <ChevronDown /> */}
                 </Button>
               </div>
             </div>
@@ -135,7 +136,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
               id="nodegraph"
               collapsible
               minSize={20}
-              defaultSize={60}
+              defaultSize={10}
               ref={nodegraphRef}
             >
               <Flow params={params} />
