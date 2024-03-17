@@ -10,17 +10,11 @@ import { createClient } from "./utils/supabase/client";
 import { Session } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useAuth } from "./utils/providers/authProvider";
 
 const Home = () => {
-  const [session, setSession] = useState<Session | null>(null);
-  const router = useRouter();
+  const auth = useAuth();
   const supabase = createClient();
-
-  useEffect(() => {
-    const session = supabase.auth.getSession().then((session) => {
-      setSession(session.data.session);
-    });
-  }, []);
 
   const handleSearchSubmit = (query: string) => {
     console.log("Search query:", query);
@@ -30,7 +24,7 @@ const Home = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       {/* Main Content */}
-      <h1>Logged in as: {session?.user.email ?? ""}</h1>
+      <h1>Logged in as: {auth.user?.email}</h1>
       <Button
         onClick={() => {
           supabase.auth.signOut();
