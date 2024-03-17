@@ -20,7 +20,7 @@ const teamLeads = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -29,7 +29,7 @@ const teamLeads = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	}
@@ -42,7 +42,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -51,7 +51,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -60,7 +60,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -69,7 +69,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -78,7 +78,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -87,7 +87,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -96,7 +96,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -105,7 +105,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -114,7 +114,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -123,7 +123,7 @@ const frontend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	}
@@ -136,7 +136,7 @@ const backend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -145,7 +145,7 @@ const backend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -154,7 +154,7 @@ const backend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -163,7 +163,7 @@ const backend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	},
@@ -172,7 +172,7 @@ const backend = [
 		image: "https://i.pinimg.com/originals/89/79/90/897990126794575981766f3c71324152.jpg",
 		name: "CHUU",
 		role: "Frontend Developer",
-		quote: "I worked on...",
+		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
 		linkedin: "http://linkedin."
 	}

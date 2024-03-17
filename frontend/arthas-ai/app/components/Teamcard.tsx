@@ -25,13 +25,13 @@ const TeamCard: React.FC<TeamCardProps> = ({
   role,
   quote,
   github,
-  linkedin,
+  linkedin
 }) => {
   return (
     <Card className="flex flex-col justify-between bg-white rounded-lg shadow-lg overflow-hidden w-20px h-218px">
       <img
         src={image}
-        alt={name}
+        alt={name} 
         className="w-full object-cover rounded-t-lg"
         style={{ maxHeight: "250px" }}
       />
