@@ -29,7 +29,7 @@ const TeamCard: React.FC<TeamCardProps> = ({
 }) => {
   return (
     <Card
-      className="flex flex-col justify-between bg-white rounded-lg shadow-lg overflow-hidden"
+      className="flex flex-col justify-between bg-custom-gradient rounded-lg shadow-lg overflow-hidden"
       style={{ width: "205px", height: "335.69px" }}
     >
       <img
