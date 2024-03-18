@@ -16,12 +16,14 @@ import {
   PanelTopOpen,
   ChevronLeft,
   ArrowRight,
-  ChevronDown,
+  ListCollapse,
 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 
 const Editor = dynamic(() => import("./notes"), { ssr: false });
 const Flow = dynamic(() => import("./graphs"), { ssr: false });
+
+// TODO: on collapse, rotate arrow 180deg
 
 function DocumentEditor({ params }: { params: { doc: string } }) {
   const fetcher = useQuery({
@@ -54,16 +56,18 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
       <ResizablePanelGroup direction="horizontal" className="h-full">
         <ResizablePanel id="reader" className="w-full" defaultSize={50}>
           <div id="top-reader" className="flex justify-between p-4">
-            <Button variant="outline">
+            <Button variant="ghost">
               <ChevronLeft />
             </Button>
             <Button
               onClick={() => {
                 handleCollapse(readerRef);
               }}
+              variant="outline"
             >
-              <ArrowRight />
+              <ListCollapse />
             </Button>
+            <div>sads</div>
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />

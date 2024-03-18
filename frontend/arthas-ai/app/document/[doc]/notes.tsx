@@ -27,7 +27,7 @@ export default function Editor({ params }: { params: { doc: string } }) {
       children: [],
     },
   ]);
-  const { user, session } = useAuth();
+
   const supabase = createClient();
 
   const { toast } = useToast();
