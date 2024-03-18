@@ -33,7 +33,7 @@ const About = () => {
 
         <div className="flex flex-col md:flex-row w-full min-h-screen">
           {/* SideBar */} 
-          <div className="sticky top-0 bg-white border-r-2 p-6 w-full md:w-1/5 h-screen overflow-y-auto">
+          <div className="sticky top-0 bg-white border-r-2 p-4 h-3/4 md:w-1/5 h-screen overflow-y-auto">
             <h2 className="text-left font-medium text-2xl pb-4"> Overview </h2>
             <div className = "flex flex-col"> 
                 <Link href="#section-1" className="text-left italic underline pb-3">Section 1</Link>
