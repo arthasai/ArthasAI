@@ -299,7 +299,7 @@ const ForgotPasswordComp = (props: any) => {
 		<div>
 			<h2 className="text-3xl pt-12">Forgot Password?</h2>
 			<h3 className="text-dashLinkText text-sm pt-2">
-				No worries! Just enter your email and we'll send you a reset link.
+				No worries! Just enter your email and we will send you a reset link.
 			</h3>
 			<div className="mt-12"></div>
 			<div>
@@ -364,7 +364,5 @@ const Homepage = () => {
 		</div>
 	);
 };
-
-// bg-gradient-to-br from-neutral-50 via-purple-50 to-fuchsia-200
 
 export default Homepage;
