@@ -22,7 +22,7 @@ const teamLeads = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "2",
@@ -31,7 +31,7 @@ const teamLeads = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	}
 ]
 
@@ -44,7 +44,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "4",
@@ -53,7 +53,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "5",
@@ -62,7 +62,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "6",
@@ -71,7 +71,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "7",
@@ -80,7 +80,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "8",
@@ -89,7 +89,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "9",
@@ -98,7 +98,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "10",
@@ -107,7 +107,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "11",
@@ -116,7 +116,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "12",
@@ -125,7 +125,7 @@ const frontend = [
 		role: "Frontend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	}
 ]
 
@@ -138,7 +138,7 @@ const backend = [
 		role: "Backend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "14",
@@ -147,7 +147,7 @@ const backend = [
 		role: "Backend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "15",
@@ -156,7 +156,7 @@ const backend = [
 		role: "Backend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "16",
@@ -165,7 +165,7 @@ const backend = [
 		role: "Backend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	},
 	{
 		id: "17",
@@ -174,7 +174,7 @@ const backend = [
 		role: "Backend Developer",
 		quote: `"I worked on..."`,
 		github: "http://github.com/gabsebas",
-		linkedin: "http://linkedin."
+		linkedin: "https://linkedin.com/in/gabriela-sebastian-"
 	}
 ]
 
