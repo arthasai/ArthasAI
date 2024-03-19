@@ -4,6 +4,7 @@ app = FastAPI()
 
 @app.get("/")
 def search_results():
+    # jesus was here
     return {"Homepage": 
             "use /search to search for papers, /upload to upload a paper, /chat to chat with a bot, /graph to get a graph of the data."}
 
