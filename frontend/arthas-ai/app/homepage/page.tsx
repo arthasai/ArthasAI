@@ -2,9 +2,14 @@
 "use client";
 import React from "react";
 import Slider from "./Slider";
-import { Container } from "postcss";
 import Image from "next/image";
 import Link from "next/link";
+import { set, z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createClient } from "../utils/supabase/client";
+import { loginSchema } from "../utils/forms/zodTypes";
+import { navigate } from "./actions";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import {
 	Form,
@@ -15,13 +20,6 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { set, z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createClient } from "../utils/supabase/client";
-import { loginSchema } from "../utils/forms/zodTypes";
-import { navigate } from "./actions";
-import { useForm } from "react-hook-form";
 import eye from "./eye.png";
 import eyeOff from "./eyeOff.png";
 
