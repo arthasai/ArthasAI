@@ -2,7 +2,7 @@
 "use client";
 
 // Home.tsx
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import SearchBar from "./components/Searchbar"; // Adjust the import path based on your project structure
 import { z } from "zod";
@@ -21,17 +21,14 @@ const Home = () => {
     // Add your search logic here
   };
 
-  
-
   return (
-    <div className = "flex flex-col h-screen">
-    <div className="flex flex-col justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen">
       {/* Main Content */}
       <h1>Logged in as: {auth.user?.email}</h1>
       <Button
         onClick={() => {
           supabase.auth.signOut();
-        } }
+        }}
       >
         Logout!
       </Button>
@@ -40,7 +37,7 @@ const Home = () => {
           {/* Logo */}
           Logo
         </div>
-        </div>
+
         <SearchBar onSearchSubmit={handleSearchSubmit} />
 
         <div className="col-span-3 outline p-4 text-center rounded">
