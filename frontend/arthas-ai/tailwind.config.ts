@@ -52,6 +52,11 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        dashLogoTheme: "#5F5F5F",
+        dashBackgroundTheme: "#D9D9D9",
+        dashLinkText: "#3C3C3C",
+        dashButtonBrown: "#838383",
+        dashInputColor: "#5D5D5D",
       },
       borderRadius: {
         lg: "var(--radius)",
