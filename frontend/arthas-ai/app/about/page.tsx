@@ -1,22 +1,18 @@
 // Resources.tsx
-import React from "react";
-import Head from "next/head";
+import React, {useState, useEffect} from "react";
 import Link from "next/link";
 import {
+
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+
 const About = () => {
   return (
     <>
-      <Head>
-        <title>About Arthas AI</title>
-      </Head>
-      <header className="bg-gray-100 p-6">NavBar (GIAN PLEASE HELP)</header>
-
       <main>
         {/* Banner */}
         <div className="p-10 w-1440px h-291px bg-custom-gradient">
@@ -31,17 +27,17 @@ const About = () => {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row w-full min-h-screen">
+        <div className="flex w-full min-h-screen">
           {/* SideBar */} 
-          <div className="sticky top-0 bg-white p-6 border-r-2 md:w-1/5 h-screen overflow-y-auto">
+          <div className="sticky top-0 bg-white p-6 border-r-2 md:w-1/5 md:max-h-screen md:overflow-y-auto ml-6 mt-2">
             <h2 className="text-left font-medium text-2xl pb-4"> Overview </h2>
             <div className = "flex flex-col"> 
-                <Link href="#section-1" className="text-left italic underline pb-3">Section 1</Link>
-                <Link href="#section-2" className="text-left italic underline pb-3">Section 2</Link>
-                <Link href="#section-3" className="text-left italic underline pb-3">Section 3</Link>
-                <Link href="#section-4" className="text-left italic underline pb-3">Section 4</Link>
-                <Link href="#section-5" className="text-left italic underline pb-3">Section 5</Link>
-                <Link href="#section-6" className="text-left italic underline pb-3">Section 6</Link>
+                <Link href="#section-1" className="text-left italic underline pb-2">Section 1</Link>
+                <Link href="#section-2" className="text-left italic underline pb-2">Section 2</Link>
+                <Link href="#section-3" className="text-left italic underline pb-2">Section 3</Link>
+                <Link href="#section-4" className="text-left italic underline pb-2">Section 4</Link>
+                <Link href="#section-5" className="text-left italic underline pb-2">Section 5</Link>
+                <Link href="#section-6" className="text-left italic underline pb-2">Section 6</Link>
                 <Link href="#section-7" className="text-left italic underline">FAQ</Link>
 
             </div>
@@ -49,7 +45,7 @@ const About = () => {
           </div>
 
           {/* Main Content */}
-          <div className="bg-white p-4 w-full md:w-4/5 ml-6 mt-2">
+          <div className="bg-white p-6 w-full md:w-4/5 ml-6 mt-2 mr-6">
             <h2 id="section-1" className="text-left font-medium text-2xl pb-4">
               {" "}
               Mission{" "}
