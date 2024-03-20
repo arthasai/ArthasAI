@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { Input } from "@/components/ui/input";
+import { Send } from "lucide-react";
 
 type MessageProps = {
   sender: string;
@@ -83,8 +84,8 @@ const ChatInterface = () => {
   }, [messages]);
 
   return (
-    <div className="h-96 w-96 bg-white  border border-blue-400 rounded-md flex flex-col justify-between p-">
-      <div className=" overflow-y-auto">
+    <div className=" h-full min-h-40 bg-white  rounded-md flex flex-col justify-between">
+      <div className="flex-1 overflow-y-auto">
         {" "}
         {/* show messages custom no-scrollbar class to remove automatic scrollbar from overflow-y-auto*/}
         {messages.map((message, index) => (
@@ -101,21 +102,9 @@ const ChatInterface = () => {
           onChange={handleInput}
           onKeyPress={handleKeyPress}
         />
-        <svg /* send button */
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          className="w-6 h-6 hover:cursor-pointer"
-          onClick={sendMessage}
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-          />
-        </svg>
+        <div className=" px-1 w-6 h-6 hover:cursor-pointer" onClick={sendMessage}>
+          <Send />
+        </div>
       </div>
     </div>
   );

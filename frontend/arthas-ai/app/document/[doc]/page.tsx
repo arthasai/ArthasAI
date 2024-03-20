@@ -19,6 +19,7 @@ import {
   ListCollapse,
 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
+import ChatInterface from "@/app/components/chatInterface";
 
 const Editor = dynamic(() => import("./notes"), { ssr: false });
 const Flow = dynamic(() => import("./graphs"), { ssr: false });
@@ -100,8 +101,8 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
               <Editor params={params} />
             </ResizablePanel>
             <ResizableHandle withHandle />
-            <div className="w-full p-2 flex justify-between items-center">
-              <div>Assistant</div>
+            <div className="w-9/10 h-10 flex justify-between items-center space-x-4 p-8">
+              <div >Assistant</div>
               <div>
                 <Button
                   variant="ghost"
@@ -115,12 +116,13 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
             </div>
             <ResizablePanel
               id="chatbot"
+              className='px-4 pb-2'
               collapsible
               minSize={20}
               defaultSize={20}
               ref={chatbotRef}
             >
-              Chatbot
+              <ChatInterface />
             </ResizablePanel>
             <ResizableHandle withHandle />
             <div className="w-full p-2 flex justify-between items-center">
