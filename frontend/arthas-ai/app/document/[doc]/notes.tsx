@@ -12,6 +12,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/app/utils/providers/authProvider";
 import { createClient } from "@/app/utils/supabase/client";
 import { getCurrentDate } from "@/app/utils/databaseUtils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Editor({ params }: { params: { doc: string } }) {
   const [blocks, setBlocks] = useState<PartialBlock[]>([
@@ -45,6 +46,10 @@ export default function Editor({ params }: { params: { doc: string } }) {
       if (res.error) {
         throw new Error(res.error.message);
       }
+
+      // wait 500ms
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       return res.data as PartialBlock[];
     },
     select(data) {
@@ -111,7 +116,7 @@ export default function Editor({ params }: { params: { doc: string } }) {
 
   return (
     <>
-      {editor && (
+      {editor ? (
         <BlockNoteView
           editor={editor}
           theme="light"
@@ -120,6 +125,16 @@ export default function Editor({ params }: { params: { doc: string } }) {
             setBlocks(editor.document);
           }}
         />
+      ) : (
+        <div className="w-full h-full space-y-2">
+          <div className="h-[10px]" />
+          <Skeleton className="w-3/4 h-[40px]" />
+          <Skeleton className="w-2/3 h-[24px]" />
+          <Skeleton className="w-10/12 h-[24px]" />
+          <Skeleton className="w-4/5 h-[24px]" />
+          <Skeleton className="w-5/12 h-[24px]" />
+          <Skeleton className="w-3/4 h-[24px]" />
+        </div>
       )}
     </>
   );
