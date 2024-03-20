@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { Input } from "@/components/ui/input";
 import { Send } from "lucide-react";
 
 type MessageProps = {
@@ -35,13 +34,11 @@ const Message = (
     }`}
   >
     <div className=" px-1 flex justify-between items-center timestamp text-xs text-gray-500">
-      <span className="text-[1.2rem] font-bold py-2  text-black text-[15px] ">
-        {sender}
-      </span>
+      <span className=" font-bold py-2  text-black text-[15px] ">{sender}</span>
       <span className="">{`${formatDate(timestamp)}`}</span>
     </div>
 
-    <div className=" px-1 text ">{text}</div>
+    <div className=" px-1 text whitespace-pre-wrap ">{text}</div>
   </div>
 );
 
@@ -52,11 +49,12 @@ const ChatInterface = () => {
 
   const messagesEndRef = useRef<null | HTMLDivElement>(null); // reference to know where to scroll and when
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
   };
 
   const sendMessage = () => {
+    if (inputText === "") return; // cant send empty messages
     // send message
     const newMessage = {
       sender: "User",
@@ -68,12 +66,25 @@ const ChatInterface = () => {
     setInputText(""); // clear input
   };
 
+  const handleNewLine = (e: React.KeyboardEvent) => {
+    // add new line on shift + enter
+    if (e.key === "Enter" && e.shiftKey) {
+      e.preventDefault();
+      setInputText(inputText + "\n");
+    }
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     // send message on enter
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
     }
+  };
+
+  const handleKeyPressCombined = (e: React.KeyboardEvent) => { // combined both functions so they can be added to the same input field
+    handleKeyPress(e);
+    handleNewLine(e);
   };
 
   useEffect(() => {
@@ -94,15 +105,18 @@ const ChatInterface = () => {
         <div ref={messagesEndRef} />
       </div>
       <div className="flex justify-between items-center pb-1 pl-1 pt-[0.1rem]">
-        <Input /* input for user to type message */
-          className="flex-1"
-          type="email"
+        <textarea /* input for user to type message */
+          className="flex h-10 w-full resize-none rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+          // basic border, removes resize from textarea ( can be added again if wanted, just remove resize-none)
           placeholder="Type your message here"
           value={inputText}
           onChange={handleInput}
-          onKeyPress={handleKeyPress}
+          onKeyPress={handleKeyPressCombined}
         />
-        <div className=" px-1 w-6 h-6 hover:cursor-pointer" onClick={sendMessage}>
+        <div
+          className=" px-[.60rem] w-6 h-6 hover:cursor-pointer"
+          onClick={sendMessage}
+        >
           <Send />
         </div>
       </div>
