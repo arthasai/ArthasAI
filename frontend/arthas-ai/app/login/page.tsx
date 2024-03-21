@@ -20,9 +20,6 @@ import { redirect } from "next/navigation";
 import { navigate } from "./actions";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
