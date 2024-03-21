@@ -7,7 +7,11 @@ import Link from "next/link";
 import { set, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createClient } from "../utils/supabase/client";
-import { loginSchema } from "../utils/forms/zodTypes";
+import {
+	loginSchema,
+	registerSchema,
+	forgotPasswordSchema,
+} from "../utils/forms/zodTypes";
 import { navigate } from "./actions";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -19,6 +23,20 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import eye from "./eye.png";
 import eyeOff from "./eyeOff.png";
@@ -48,6 +66,7 @@ const LoginRoute = () => {
 	const [isView, setIsView] = useState("Login");
 	return (
 		<div className="">
+			{/* <EmailSentComp /> */}
 			{isView === "ForgotPassword" ? (
 				<ForgotPasswordComp setIsView={setIsView} />
 			) : isView === "SignUp" ? (
@@ -59,19 +78,11 @@ const LoginRoute = () => {
 	);
 };
 
-const ErrorNotification = (props: { errorMessage: string }) => {
-	return (
-		<div>
-			<p className="border-l-2 border-red-500 pl-2 text-dashInputColor text-sm text-left">
-				{props.errorMessage}
-			</p>
-		</div>
-	);
-};
-
 const LoginComp = (props: any) => {
 	const [type, setType] = useState("password");
 	const [icon, setIcon] = useState(eyeOff);
+	const supabase = createClient();
+	const { toast } = useToast();
 
 	const handleToggle = () => {
 		if (type === "password") {
@@ -82,8 +93,6 @@ const LoginComp = (props: any) => {
 			setType("password");
 		}
 	};
-
-	const supabase = createClient();
 
 	const form = useForm<z.infer<typeof loginSchema>>({
 		resolver: zodResolver(loginSchema),
@@ -106,7 +115,10 @@ const LoginComp = (props: any) => {
 			})
 			.then((response) => {
 				if (response.error) {
-					console.log(response.error);
+					toast({
+						title: "❌ Error",
+						description: `${response.error.message}`,
+					});
 				} else {
 					navigate();
 				}
@@ -182,13 +194,10 @@ const LoginComp = (props: any) => {
 };
 
 const SignUpComp = (props: any) => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [emailError, setEmailError] = useState(false);
-	const [passwordError, setPasswordError] = useState(false);
-	const [signUpError, setSignUpError] = useState(false);
 	const [type, setType] = useState("password");
 	const [icon, setIcon] = useState(eyeOff);
+	const supabase = createClient();
+	const { toast } = useToast();
 
 	const handleToggle = () => {
 		if (type === "password") {
@@ -200,25 +209,35 @@ const SignUpComp = (props: any) => {
 		}
 	};
 
-	const handleSignUp = () => {
-		if (!email.includes("@")) {
-			setEmailError(true);
-		} else {
-			setEmailError(false);
-		}
+	const form = useForm<z.infer<typeof registerSchema>>({
+		resolver: zodResolver(registerSchema),
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+		values: {
+			email: "",
+			password: "",
+		},
+	});
 
-		if (password.length < 8) {
-			setPasswordError(true);
-		} else {
-			setPasswordError(false);
-		}
-
-		if (emailError && passwordError) {
-			//do something with supabase
-			if (signUpError) {
-				setSignUpError(true);
-			}
-		}
+	const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+		console.log(data);
+		await supabase.auth
+			.signUp({
+				email: data.email,
+				password: data.password,
+			})
+			.then((response) => {
+				if (response.error) {
+					toast({
+						title: "❌ Error",
+						description: `${response.error.message}`,
+					});
+				} else {
+					navigate();
+				}
+			});
 	};
 
 	return (
@@ -232,78 +251,87 @@ const SignUpComp = (props: any) => {
 				with your credentials.
 			</h3>
 			<div className="mt-12"></div>
-			<form>
-				<div className="mt-6">
-					<label
-						htmlFor="email"
-						className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
-							emailError ? "text-red-500" : "text-dashInputColor"
-						}`}>
-						Email
-					</label>
-					<input
-						type="email"
-						required
-						onChange={(e) => setEmail(e.target.value)}
-						className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
-							emailError ? "ring-red-500" : ""
-						}`}
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)}>
+					<FormField
+						control={form.control}
+						name="email"
+						render={({ field }) => (
+							<FormItem className="mb-6">
+								<FormLabel>Email</FormLabel>
+								<FormControl>
+									<Input placeholder="Email" {...field} />
+								</FormControl>
+								<FormMessage className="border-l-2 border-red-500 pl-2 text-dashInputColor text-sm text-left" />
+							</FormItem>
+						)}
 					/>
-				</div>
-				<div className="mt-6">
-					<label
-						htmlFor="password"
-						className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
-							passwordError ? "text-red-500" : "text-dashInputColor"
-						}`}>
-						Password
-					</label>
-					<div className="relative flex items-center">
-						<input
-							id="password"
-							name="password"
-							type={type}
-							onChange={(e) => setPassword(e.target.value)}
-							autoComplete="current-password"
-							required
-							className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
-								passwordError ? "ring-red-500" : ""
-							}`}
-						/>
-						<span className="absolute right-0 mr-2" onClick={handleToggle}>
-							<Image src={icon} alt="test" height={20} width={20} />
-						</span>
+					<FormField
+						control={form.control}
+						name="password"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Password</FormLabel>
+								<FormControl>
+									<div className="relative flex items-center">
+										<Input placeholder="Password" type={type} {...field} />
+										<span
+											className="absolute right-0 mr-2"
+											onClick={handleToggle}>
+											<Image src={icon} alt="test" height={20} width={20} />
+										</span>
+									</div>
+								</FormControl>
+								<FormMessage className="border-l-2 border-red-500 pl-2 text-dashInputColor text-sm text-left" />
+							</FormItem>
+						)}
+					/>
+					<div className="block w-full pt-6">
+						<button className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6">
+							Sign Up
+						</button>
 					</div>
-				</div>
-			</form>
-			<div className="w-full text-left mt-4">
-				{signUpError && (
-					<ErrorNotification errorMessage="Enter valid credentials &#128075;" />
-				)}
-			</div>
-			<div className={`block w-full ${signUpError ? "mt-6" : "mt-12"}`}>
-				<button
-					className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6"
-					onClick={handleSignUp}>
-					Sign Up
-				</button>
-			</div>
+				</form>
+			</Form>
 		</div>
 	);
 };
 
 const ForgotPasswordComp = (props: any) => {
-	const [email, setEmail] = useState("");
-	const [emailError, setEmailError] = useState(false);
+	const supabase = createClient();
+	const { toast } = useToast();
 
-	const handleEmail = () => {
-		if (!email.includes("@")) {
-			setEmailError(true);
-		} else {
-			setEmailError(false);
-			props.setIsView("Login");
-		}
+	const form = useForm<z.infer<typeof forgotPasswordSchema>>({
+		resolver: zodResolver(forgotPasswordSchema),
+		defaultValues: {
+			email: "",
+		},
+		values: {
+			email: "",
+		},
+	});
+	const onSubmit = async (data: z.infer<typeof forgotPasswordSchema>) => {
+		console.log(data);
+		await supabase.auth
+			.resetPasswordForEmail(data.email, {
+				redirectTo: "https://example.com/update-password",
+			})
+			.then((response) => {
+				if (response.error) {
+					toast({
+						title: "❌ Error",
+						description: `${response.error.message}`,
+					});
+				} else {
+					toast({
+						title: "✅ Password Reset Email Sent!",
+						description: "Please check your email for a reset link.",
+					});
+					props.setIsView("Login");
+				}
+			});
 	};
+
 	return (
 		<div>
 			<h2 className="text-3xl pt-12">Forgot Password?</h2>
@@ -311,38 +339,37 @@ const ForgotPasswordComp = (props: any) => {
 				No worries! Just enter your email and we will send you a reset link.
 			</h3>
 			<div className="mt-12"></div>
-			<div>
-				<label
-					htmlFor="email"
-					className={`block text-sm font-medium leading-6 text-gray-900 pb-2 ${
-						emailError ? "text-red-500" : "text-dashInputColor"
-					}`}>
-					Email
-				</label>
-				<input
-					type="email"
-					required
-					onChange={(e) => setEmail(e.target.value)}
-					className={`block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
-						emailError ? "ring-red-500" : ""
-					}`}
-				/>
-			</div>
-			<div className="block w-full mt-12">
-				<button
-					className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6"
-					onClick={handleEmail}>
-					{/* onClick={() => props.setIsView("Login")} */}
-					Reset Password
-				</button>
-			</div>
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)}>
+					<FormField
+						control={form.control}
+						name="email"
+						render={({ field }) => (
+							<FormItem className="mb-10">
+								<FormLabel>Email</FormLabel>
+								<FormControl>
+									<Input placeholder="Email" {...field} />
+								</FormControl>
+								<FormMessage className="border-l-2 border-red-500 pl-2 text-dashInputColor text-sm text-left" />
+							</FormItem>
+						)}
+					/>
+					<div>
+						<button className="rounded-full block w-full bg-dashButtonBrown text-white pt-3 pb-3 mt-6">
+							Reset Password
+						</button>
+					</div>
+				</form>
+			</Form>
 		</div>
 	);
 };
 
 const Homepage = () => {
+	const { toast } = useToast();
 	return (
 		<div className="flex w-full min-h-screen">
+			<Toaster />
 			{/* left container */}
 			<div className="w-3/5 m-auto">
 				<Slider slides={slides} />
