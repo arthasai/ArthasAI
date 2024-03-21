@@ -8,7 +8,7 @@ import pickle  # For serialization
 from typing import List
 from dotenv import load_dotenv
 import os
-from datetime import datetime
+import datetime
 
 def configure():
     load_dotenv()
@@ -49,7 +49,7 @@ def serialize_embeddings(embeddings):
     return serialized_embeddings
 
 def save_to_storage(user_id: str,  paper_id: str, data: dict):
-    current_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")  # Format: YYYYMMDDHHMMSS
+    current_timestamp = datetime.datetime.now(datetime.timezone.utc)
     key = f"{user_id}-{paper_id}-{current_timestamp}-context.pkl"
 
     serialized_data = pickle.dumps(data)
