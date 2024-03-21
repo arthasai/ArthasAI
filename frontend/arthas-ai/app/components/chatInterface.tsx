@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { Input } from "@/components/ui/input";
+import { Send } from "lucide-react";
 
 type MessageProps = {
   sender: string;
@@ -34,13 +34,11 @@ const Message = (
     }`}
   >
     <div className=" px-1 flex justify-between items-center timestamp text-xs text-gray-500">
-      <span className="text-[1.2rem] font-bold py-2  text-black text-[15px] ">
-        {sender}
-      </span>
+      <span className=" font-bold py-2  text-black text-[15px] ">{sender}</span>
       <span className="">{`${formatDate(timestamp)}`}</span>
     </div>
 
-    <div className=" px-1 text ">{text}</div>
+    <div className=" px-1 text whitespace-pre-wrap ">{text}</div>
   </div>
 );
 
@@ -51,11 +49,12 @@ const ChatInterface = () => {
 
   const messagesEndRef = useRef<null | HTMLDivElement>(null); // reference to know where to scroll and when
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
   };
 
   const sendMessage = () => {
+    if (inputText === "") return; // cant send empty messages
     // send message
     const newMessage = {
       sender: "User",
@@ -67,12 +66,25 @@ const ChatInterface = () => {
     setInputText(""); // clear input
   };
 
+  const handleNewLine = (e: React.KeyboardEvent) => {
+    // add new line on shift + enter
+    if (e.key === "Enter" && e.shiftKey) {
+      e.preventDefault();
+      setInputText(inputText + "\n");
+    }
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     // send message on enter
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
     }
+  };
+
+  const handleKeyPressCombined = (e: React.KeyboardEvent) => { // combined both functions so they can be added to the same input field
+    handleKeyPress(e);
+    handleNewLine(e);
   };
 
   useEffect(() => {
@@ -83,8 +95,8 @@ const ChatInterface = () => {
   }, [messages]);
 
   return (
-    <div className="h-96 w-96 bg-white  border border-blue-400 rounded-md flex flex-col justify-between p-">
-      <div className=" overflow-y-auto">
+    <div className=" h-full min-h-40 bg-white  rounded-md flex flex-col justify-between">
+      <div className="flex-1 overflow-y-auto">
         {" "}
         {/* show messages custom no-scrollbar class to remove automatic scrollbar from overflow-y-auto*/}
         {messages.map((message, index) => (
@@ -93,29 +105,20 @@ const ChatInterface = () => {
         <div ref={messagesEndRef} />
       </div>
       <div className="flex justify-between items-center pb-1 pl-1 pt-[0.1rem]">
-        <Input /* input for user to type message */
-          className="flex-1"
-          type="email"
+        <textarea /* input for user to type message */
+          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+          // basic border, removes resize from textarea ( can be added again if wanted, just remove resize-none)
           placeholder="Type your message here"
           value={inputText}
           onChange={handleInput}
-          onKeyPress={handleKeyPress}
+          onKeyPress={handleKeyPressCombined}
         />
-        <svg /* send button */
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          className="w-6 h-6 hover:cursor-pointer"
+        <div
+          className=" px-[.60rem] w-6 h-6 hover:cursor-pointer"
           onClick={sendMessage}
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-          />
-        </svg>
+          <Send />
+        </div>
       </div>
     </div>
   );
