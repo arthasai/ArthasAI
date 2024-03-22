@@ -378,10 +378,10 @@ const Homepage = () => {
 				<div className="h-1/6 text-center">
 					<div className="h-4/6"></div>
 					<div className="h-2/6 text-dashLinkText">
-						<Link href="/resources" className="pr-6">
+						<Link href="/about" className="pr-6">
 							About Us
 						</Link>
-						<Link href="/resources">Our Team</Link>
+						<Link href="/teampage">Our Team</Link>
 					</div>
 				</div>
 			</div>
