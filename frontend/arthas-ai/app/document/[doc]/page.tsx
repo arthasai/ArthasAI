@@ -30,13 +30,6 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
     },
   });
 
-  const mutator = useMutation({
-    mutationKey: ["document", "update"],
-    mutationFn: async () => {
-      return { hello: "world" };
-    },
-  });
-
   const readerRef = useRef<ImperativePanelHandle>(null);
   const notesRef = useRef<ImperativePanelHandle>(null);
   const chatbotRef = useRef<ImperativePanelHandle>(null);
