@@ -1,44 +1,49 @@
 // Resources.tsx
 "use client";
 import React from "react";
-import Link from "next/link";
 import Teamcard from "../components/Teamcard";
-import Head from "next/head";
-// import { teamLeads } from "./route";
-
 import { useQuery } from "@tanstack/react-query";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 const TeamPage = () => {
   const fetcher = useQuery({
     queryKey: [`/teampage/api/test`],
     queryFn: async () => {
-      await fetch(`/teampage/api/test`).then((res) => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        } else {
-		  const result = res.json();
-		  console.log({result});
-          return result;
-        }
-      });
+      const response = await fetch(`/teampage/api/test`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
     },
   });
 
+  const isLoading = fetcher.isLoading;
+  const isError = fetcher.isError;
+  const data = fetcher.data;
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or any loading indicator you prefer
+  }
+
+  if (isError) {
+    return <div>Error loading data</div>; // Or any error handling you prefer
+  }
+
+  // Correctly destructure the nested data
+  const { teamLeads, frontend, backend } = data.data;
+
+  // Define a type for a team member
+  type TeamMember = {
+    id: string;
+    image: string;
+    name: string;
+    role: string;
+    quote: string;
+    github: string;
+    linkedin: string;
+  };
+
   return (
     <>
-      <Head>
-        <title>Meet the Arthas AI Team!</title>
-      </Head>
-      <header className="bg-gray-100 p-6">NavBar (GIAN PLEASE HELP)</header>
       <main>
         {/* Banner */}
         <div className="p-10 w-1440 h-302.093 bg-custom-gradient">
@@ -60,9 +65,9 @@ const TeamPage = () => {
           <h1 className="text-center text-3xl font-medium">Team Leads</h1>
           {/* Team Leads Grid */}
           <div className="grid grid-cols-2 gap-12 max-w-6xl pt-10">
-            {/* {teamLeads.map((lead) => (
-              <Teamcard key={lead.id} {...lead} />
-            ))} */}
+            {teamLeads.map((lead: TeamMember) => (
+                <Teamcard key={lead.id} {...lead} />
+              ))}
           </div>
         </div>
         {/* Frontend Team */}
@@ -72,9 +77,9 @@ const TeamPage = () => {
           </h1>
           {/* Frontend Team Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mx-auto max-w-7xl">
-            {/* {frontend.map((frontend) => (
+            {frontend.map((frontend: TeamMember) => (
               <Teamcard key={frontend.id} {...frontend} />
-            ))} */}
+            ))}
           </div>
         </div>
         {/* Backend Team */}
@@ -84,9 +89,9 @@ const TeamPage = () => {
           </h1>
           {/* Backend Team Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mx-auto max-w-7xl">
-            {/* {backend.map((backend) => (
+            {backend.map((backend: TeamMember) => (
               <Teamcard key={backend.id} {...backend} />
-            ))} */}
+            ))}
           </div>
         </div>
       </main>
