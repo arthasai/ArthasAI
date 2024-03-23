@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -9,15 +9,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { ImperativePanelHandle, collapsePanel } from "../utils";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 import dynamic from "next/dynamic";
-import {
-  Settings,
-  PanelTopOpen,
-  ChevronLeft,
-  ArrowRight,
-  ListCollapse,
-} from "lucide-react";
+import { Settings, ChevronLeft, ArrowRight, ListCollapse } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import ChatInterface from "@/app/components/chatInterface";
 
@@ -28,10 +23,10 @@ const Flow = dynamic(() => import("./graphs"), { ssr: false });
 
 function DocumentEditor({ params }: { params: { doc: string } }) {
   const fetcher = useQuery({
-    queryKey: [`/document/${params.doc}/documentAPI`],
+    queryKey: [`/document/${params.doc}/api/test`],
     queryFn: async () => {
-      // TODO: Fetch all document information
-      return { hello: "world" };
+      const { data } = await axios.get(`/document/${params.doc}/api/tsest`);
+      return data;
     },
   });
 
