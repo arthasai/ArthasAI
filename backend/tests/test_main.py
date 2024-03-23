@@ -12,9 +12,10 @@ class MockResponse:
 
 @pytest.fixture
 def mock_client(mocker):
-    mock = mocker.patch(backend.main)
+    mock = mocker.patch()
     mock.embeddings.create.return_value = MockResponse([[0.1, 0.2], [0.3, 0.4]])
     return mock
+
 def test_get_embeddings(mock_client):
     texts = ["Hello world", "Test sentence"]
     model = "backend.main"
@@ -24,6 +25,8 @@ def test_get_embeddings(mock_client):
     assert embeddings == expected_embeddings
     mock_client.embeddings.create.assert_called_once_with(input=texts, model=model)
 
+def test_s3_Bucket():
+    
 # write test functions
 def test_add_numbers():
     assert add_numbers(2, 3) == 5
