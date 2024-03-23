@@ -10,6 +10,7 @@ export async function GET(
     generateRandomNodesWithConnections();
   return NextResponse.json({
     message: "This is a GET request",
+    documentID: documentID,
     data: {
       nodes: randomNodes,
       connections: randomConnections,

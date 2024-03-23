@@ -68,7 +68,6 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
             >
               <ListCollapse />
             </Button>
-            <div>sads</div>
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
@@ -102,7 +101,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
             </ResizablePanel>
             <ResizableHandle withHandle />
             <div className="w-9/10 h-10 flex justify-between items-center space-x-4 p-8">
-              <div >Assistant</div>
+              <div>Assistant</div>
               <div>
                 <Button
                   variant="ghost"
@@ -116,7 +115,7 @@ function DocumentEditor({ params }: { params: { doc: string } }) {
             </div>
             <ResizablePanel
               id="chatbot"
-              className='px-4 pb-2'
+              className="px-4 pb-2"
               collapsible
               minSize={20}
               defaultSize={20}
