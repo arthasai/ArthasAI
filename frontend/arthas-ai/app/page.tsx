@@ -12,7 +12,7 @@ import {
 	registerSchema,
 	forgotPasswordSchema,
 } from "./utils/forms/zodTypes";
-import { navigate } from "./homepage/actions";
+import { navigate } from "./dashboard/action";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import {

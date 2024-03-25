@@ -1,4 +1,5 @@
 import { BoxIcon } from 'lucide-react';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Navbar = () => {
@@ -15,26 +16,25 @@ const Navbar = () => {
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
-                                <a href="/login" className="text-white">
-                                    <BoxIcon></BoxIcon> 
-                                    {/**LOGO GOES HERE */}
-                                </a>
+                                <Link href="/" className="text-white">
+                                    <BoxIcon></BoxIcon>
+                                </Link>
                             </div>
                         </div>
-                        <div className="hidden md:flex flex-grow">
+                        <div className="hidden md:flex flex-grow ">
                             <div className="ml-4 flex items-center justify-end space-x-20 flex-grow">
-                                <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                                <Link href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
                                     Home
-                                </a>
-                                <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
-                                    About
-                                </a>
-                                <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
-                                    Team
-                                </a>
-                                <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
-                                    TRY ARTHAS AI
-                                </a>
+                                </Link>
+                                <Link href="/about" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                                    About Us
+                                </Link>
+                                <Link href="/teampage" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                                    Our Team
+                                </Link>
+                                <Link href="/document/4df63cc6-1918-45d0-a7df-aac5a62a54bc" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                                    Try Arthas!
+                                </Link>
                             </div>
                         </div>
                         <div className="md:hidden flex items-center">
@@ -67,18 +67,18 @@ const Navbar = () => {
                 {isClick && (
                     <div className="md:hidden">
                         <div className="px-2 pt-2 pb-3 space-x-20 sm:px-3">
-                            <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                            <Link href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
                                 Home
-                            </a>
-                            <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
-                                About
-                            </a>
-                            <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
-                                Team
-                            </a>
-                            <a href="/" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
-                                TRY ARTHAS AI
-                            </a>
+                            </Link>
+                            <Link href="/about" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                                About Us
+                            </Link>
+                            <Link href="/teampage" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                                Our Team
+                            </Link>
+                            <Link href="/document/4df63cc6-1918-45d0-a7df-aac5a62a54bc" className="text-white hover:bg-white hover:text-black rounded-lg p-2">
+                                Try Arthas!
+                            </Link>
                         </div>
                     </div>
                 )}
