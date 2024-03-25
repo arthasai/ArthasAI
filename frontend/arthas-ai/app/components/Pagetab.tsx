@@ -13,7 +13,7 @@ export default function Pagetab() {
           Dashboard
         </Link>
         <Link
-          href="/"
+          href="#"
           className="text-muted-foreground text-m pb-4 pt-6 transition-colors focus:text-foreground focus:underline focus:underline-offset-[18px] decoration-[3px]  active:underline-offset-[18px]"
         >
           Search
