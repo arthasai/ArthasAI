@@ -1,5 +1,5 @@
 #Ignore .env file
-backend/backend/.env
+backend/ArthasAIbackend/.env
 
 *.log
 

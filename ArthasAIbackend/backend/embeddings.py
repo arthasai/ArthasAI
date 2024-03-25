@@ -3,6 +3,7 @@ from typing import List
 import together
 from dotenv import load_dotenv
 import os
+from backend.config import Settings
 # Replace 'your_access_key_id' and 'your_secret_access_key' with your actual AWS credentials
 def configure():
     load_dotenv()
