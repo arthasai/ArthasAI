@@ -24,4 +24,4 @@ Running an Example of ColBERT Search (to test dependencies)
 python colbert_search.py --example
 ```
 
-![Running Example of ColBERT](image-1.png)
+![Running Example of ColBERT](./images/image-1.png)
