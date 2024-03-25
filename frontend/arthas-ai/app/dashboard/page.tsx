@@ -3,6 +3,14 @@
 
 import React, { useState } from "react";
 
+// components
+import Link from "next/link";
+import Image from "next/image";
+import { Search, Users } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import Pagetab from "@/app/components/Pagetab";
+
 const handleClick1 = () => {
   window.scrollTo({ top: 30, behavior: "smooth" });
 };
@@ -18,74 +26,165 @@ const handleClick3 = () => {
 const Home = () => {
   return (
     <div id="main">
+      <Pagetab />
       {/* Start Melvin - Search bar */}
-      <form id="searchbar" className="max-w-lg mx-auto mt-6">
-        <label
-          htmlFor="dashboard-search"
-          className="mb-2 text-sm font-medium txt-gray-900 sr-only"
-        >
-          Search
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-800"
-              aria-hidden="true"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+
+      <div className=" top-0 flex h-[120px] items-center border-b px-8 md:px-14">
+        {/* Title */}
+        <div className="hidden flex-col  text-lg font-medium md:flex md:flex-row">
+          <h1 className=" text-3xl text-foreground transition-colors">
+            {" "}
+            Dashboard{" "}
+          </h1>
+        </div>
+        {/* Search Bar */}
+        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          <form className="ml-auto flex-1 sm:flex-initial">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search Documents, Collections..."
+                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[450px] rounded-full border-2"
               />
-            </svg>
+            </div>
+          </form>
+        </div>
+      </div>
+      {/* Header End */}
+
+      <main className="flex flex-1 flex-col px-8 gap-4 md:gap-8 bg-gray-50">
+        <div className="flex flex-col gap-2 pb-4">
+          {/* Doc Section Start */}
+          <div>
+            <CardHeader>
+              <CardTitle className="text-[20px] font-medium">
+                Recent Viewed Docs
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-4 gap-6">
+              <Card className="flex flex-col justify-start border-none h-60 bg-gray-200">
+                <CardHeader className="flex-row gap-4 ">
+                  <CardTitle className="text-base font-medium">
+                    Document One
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+              <Card className="flex flex-col justify-start border-none h-60 bg-gray-200">
+                <CardHeader className="flex-row gap-4 ">
+                  <CardTitle className="text-base font-medium">
+                    Document Two
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+              <Card className="flex flex-col justify-start border-none h-60 bg-gray-200">
+                <CardHeader className="flex-row gap-4 ">
+                  <CardTitle className="text-base font-medium">
+                    Document Three
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+              <Card className="flex flex-col justify-start border-none h-60 bg-gray-200">
+                <CardHeader className="flex-row gap-4 ">
+                  <CardTitle className="text-base font-medium">
+                    Document Four
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+            </CardContent>
+          </div>{" "}
+          {/* Docs Section End */}
+          {/* Collection Section Start*/}
+          <div className="xl:col-span-2 border-none">
+            <CardHeader className="flex flex-row items-center">
+              <div className="grid gap-2">
+                <CardTitle className="text-[20px] font-medium">
+                  Collections
+                </CardTitle>
+                {/* <CardDescription>All your collections</CardDescription> */}
+              </div>
+            </CardHeader>
+            <CardContent className="grid grid-cols-4 gap-6">
+              <Link href={"#"}>
+                <Card className="flex flex-col justify-center items-center border-none bg-gray-200 hover:bg-gray-300">
+                  <CardHeader className="flex-row gap-4">
+                    {/* <Image
+                      src="/assets/folder.png"
+                      alt="Collection Image"
+                      width={25}
+                      height={25}
+                    /> */}
+                    <CardTitle className="text-base font-medium">
+                      Collection Name
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+              <Link href={"#"}>
+                <Card className="flex flex-col justify-center items-center border-none bg-gray-200 hover:bg-gray-300">
+                  <CardHeader className="flex-row gap-4">
+                    {/* <Image
+                      src="/assets/folder.png"
+                      alt="Collection Image"
+                      width={25}
+                      height={25}
+                    /> */}
+                    <CardTitle className="text-base font-medium">
+                      Collection Name
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+              <Link href={"#"}>
+                <Card className="flex flex-col justify-center items-center border-none bg-gray-200 hover:bg-gray-300">
+                  <CardHeader className="flex-row gap-4">
+                    {/* <Image
+                      src="/assets/folder.png"
+                      alt="Collection Image"
+                      width={25}
+                      height={25}
+                    /> */}
+                    <CardTitle className="text-base font-medium">
+                      Collection Name
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+              <Link href={"#"}>
+                <Card className="flex flex-col justify-center items-center border-none bg-gray-200 hover:bg-gray-300">
+                  <CardHeader className="flex-row gap-4">
+                    {/* <Image
+                      src="/assets/folder.png"
+                      alt="Collection Image"
+                      width={25}
+                      height={25}
+                    /> */}
+                    <CardTitle className="text-base font-medium">
+                      Collection Name
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+              <Link href={"#"}>
+                <Card className="flex flex-col justify-center items-center border-none bg-gray-200 hover:bg-gray-300">
+                  <CardHeader className="flex-row gap-4">
+                    {/* <Image
+                      src="/assets/folder.png"
+                      alt="Collection Image"
+                      width={25}
+                      height={25}
+                    /> */}
+                    <CardTitle className="text-base font-medium">
+                      Collection Name
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+            </CardContent>
           </div>
-          <input
-            type="search"
-            id="dashboard-search"
-            className="block w-full p-3 ps-10 text-md text-gray-900 border-2 border-[#4b4b4b] rounded-full focus:outline-none [&::-webkit-search-cancel-button]:hidden"
-            placeholder="Search Documents, Notes..."
-          ></input>
+          {/* Collection Section End*/}
         </div>
-      </form>
-      {/* End Melvin */}
-
-      {/*Start Laura 2 column */}
-      <div id="overview" className=" ml-10 mt-20 mb-20 columns-2">
-        <h1 className="fixed text-[40px] pl-249 pr-249 pb-446 pt-446 ">
-          Overview
-        </h1>
-      </div>
-
-      <div id="bottom content" className="mt-5">
-        <div
-          id="overview content"
-          className=" w-[225px] h-[300px]  ml-10 gap-8 border-r border-black flex flex-col fixed"
-        >
-          <p className="text-[25px]" onClick={handleClick1}>
-            Bookmarks
-          </p>
-          <p className="text-[25px]" onClick={handleClick2}>
-            Notes
-          </p>
-          <p className="text-[25px]" onClick={handleClick3}>
-            Viewed Docs
-          </p>
-        </div>
-
-        <div id="bookmark content" className=" ml-[300px] ">
-          <h1 className="text-[40px] mb-[50px]"> Recently Viewed Docs</h1>
-          <ol></ol>
-
-          <h1 className="text-[40px] mb-[50px]"> Collections</h1>
-          <ol></ol>
-        </div>
-      </div>
-
-      {/* End Laura*/}
+      </main>
     </div>
   );
 };
