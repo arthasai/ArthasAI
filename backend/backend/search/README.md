@@ -24,9 +24,9 @@ Running an Example of ColBERT Search (to test dependencies)
 python colbert_search.py --example
 ```
 
-![Running Example of ColBERT](image-1.png)
+![Running Example of ColBERT](images/image-1.png)
 
-![Running Example of ColBERT](image.png)
+![Running Example of ColBERT](images/image.png)
 
 # How this works:
 ColBERT uses an Indexer object that compresses documents into an indexable "binary" format. The objects are stored in the folder `./experiments` and each experiment has its own subfolder. Inside each experiment's subfolder (defaulted to `./experiments/default`), there is a list of indices represented as folders. These indices are tied directly to Searcher objects generated so they can perform search on them. 
