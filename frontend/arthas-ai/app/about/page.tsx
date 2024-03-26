@@ -9,14 +9,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Navbar from "../components/Navbar";
 
 
 const About = () => {
   return (
     <>
       <header>
-        <Navbar/>
       </header>
       <main>
         {/* Banner */}
