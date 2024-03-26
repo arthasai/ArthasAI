@@ -5,9 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
 
 interface TeamCardProps {
@@ -42,10 +40,10 @@ const TeamCard: React.FC<TeamCardProps> = ({
         <div className="flex items-center justify-between">
             <CardTitle className="text-lg font-semibold mb-1">{name}</CardTitle>
             <div className="flex items-center space-x-2">
-            <a href={github} aria-label="GitHub" className="w-8 h-8">
+            <a target="_blank" href={github} className="w-8 h-8">
                 <Github />
             </a>
-            <a href={linkedin} aria-label="LinkedIn" className="w-8 h-8">
+            <a target="_blank" href={linkedin} aria-label="LinkedIn" className="w-8 h-8">
                 <Linkedin />
             </a>
             </div>
