@@ -6,10 +6,12 @@ export async function GET(
   { params }: { params: { doc: string } }
 ) {
   const documentID = params.doc;
+
   const { nodes: randomNodes, connections: randomConnections } =
     generateRandomNodesWithConnections();
   return NextResponse.json({
     message: "This is a GET request",
+    documentID: documentID,
     data: {
       nodes: randomNodes,
       connections: randomConnections,
