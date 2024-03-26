@@ -70,8 +70,8 @@ const TeamPage = () => {
           {/* Team Leads Grid */}
           <div className="grid grid-cols-2 gap-12 max-w-6xl pt-10">
             {teamLeads.map((lead: TeamMember) => (
-                <Teamcard key={lead.id} {...lead} />
-              ))}
+              <Teamcard key={lead.id} {...lead} />
+            ))}
           </div>
         </div>
         {/* Frontend Team */}
