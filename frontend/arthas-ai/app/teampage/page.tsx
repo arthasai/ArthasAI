@@ -2,6 +2,7 @@
 "use client";
 import React from "react";
 import Teamcard from "../components/Teamcard";
+import Navbar from "../components/Navbar";
 import { useQuery } from "@tanstack/react-query";
 
 const TeamPage = () => {
@@ -44,6 +45,9 @@ const TeamPage = () => {
 
   return (
     <>
+      <header>
+        <Navbar/>
+      </header>
       <main>
         {/* Banner */}
         <div className="p-10 w-1440 h-302.093 bg-custom-gradient">

@@ -9,7 +9,7 @@ export async function GET() {
             name: "GOWON",
             role: "Team Lead",
             quote: `"I worked on..."`,
-            github: "http://github.com/gabsebas",
+            github: "https://github.com/gabsebas",
             linkedin: "https://linkedin.com/in/gabriela-sebastian-"
         },
         {
@@ -29,7 +29,7 @@ export async function GET() {
             name: "CHUU",
             role: "Frontend Developer",
             quote: `"I worked on..."`,
-            github: "http://github.com/gabsebas",
+            github: "https://github.com/gabsebas",
             linkedin: "https://linkedin.com/in/gabriela-sebastian-"
         },
         {
