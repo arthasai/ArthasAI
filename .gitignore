@@ -1,7 +1,0 @@
-#Ignore .env file
-backend/ArthasAIbackend/.env
-backend/backend/.env
-
-*.log
-
-node_modules/

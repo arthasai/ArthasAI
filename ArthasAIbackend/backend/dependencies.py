@@ -1,4 +1,4 @@
-from config import settings
+from .config import settings
 import boto3
 from together import Together
 
@@ -13,3 +13,6 @@ def get_s3_client():
 def get_together_client():
     return settings.together_api_key
 
+
+def numbers(x,y):
+    return x + y

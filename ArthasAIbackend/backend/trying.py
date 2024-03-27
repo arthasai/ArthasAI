@@ -14,3 +14,4 @@ class SomeService:
 settings = Settings()
 some_service = SomeService(settings)
 some_service.do_something_with_aws_credentials()
+

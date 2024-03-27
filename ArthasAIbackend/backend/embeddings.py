@@ -3,7 +3,7 @@ from typing import List
 import together
 from dotenv import load_dotenv
 import os
-from backend.config import Settings
+from config import settings
 # Replace 'your_access_key_id' and 'your_secret_access_key' with your actual AWS credentials
 def configure():
     load_dotenv()
@@ -22,3 +22,4 @@ embeddings = get_embeddings(input_texts, model='togethercomputer/m2-bert-80M-8k-
 
 print(embeddings)
 # [[0.13437459, 0.09866201, ..., -0.20736569]]
+
