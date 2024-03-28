@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { navigate } from "./actions";
-import TextConversion from "../document/[doc]/textConversion";
+import ConvertMarkdownToLatex from "../document/[doc]/convertMarkdownToLatex";
 
 function Login() {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -53,7 +53,7 @@ function Login() {
 
   return (
     <div>
-       <h1>Login</h1>
+      <h1>Login</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
