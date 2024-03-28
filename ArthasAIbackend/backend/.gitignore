@@ -1,5 +1,7 @@
 # Ignore the .env file in the backend directory
 /backend/.env
+.env
+.env*.local
 
 # Ignore log files
 *.log
