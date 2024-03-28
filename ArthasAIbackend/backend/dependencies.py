@@ -1,4 +1,4 @@
-from .config import settings
+from config import settings
 import boto3
 from together import Together
 

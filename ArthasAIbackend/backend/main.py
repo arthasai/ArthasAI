@@ -4,8 +4,8 @@ import boto3
 import together
 import pickle  # For serialization
 from dotenv import load_dotenv
-from .storage import save_to_storage, load_from_storage, load_embeddings_from_s3, save_embeddings_to_s3
-from .config import Settings
+from storage import save_to_storage, load_from_storage, load_embeddings_from_s3, save_embeddings_to_s3
+from config import Settings
 import os
 from typing import List
 from dependencies import get_s3_client, get_together_client
