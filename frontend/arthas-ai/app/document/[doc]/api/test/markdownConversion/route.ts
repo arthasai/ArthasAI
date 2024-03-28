@@ -31,7 +31,9 @@ export async function POST(req: NextRequest) {
           { status: 500 }
         );
       }
-    } else if (latexContent) { // if the markdown is converted, convert to html
+    } 
+    
+    if (latexContent) { // if the markdown is converted, convert to html
       try {
         const htmlOptions = {
           from: 'latex',

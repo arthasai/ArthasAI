@@ -18,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { navigate } from "./actions";
-import ConvertMarkdownToLatex from "../document/[doc]/convertMarkdownToLatex";
 
 function Login() {
   const form = useForm<z.infer<typeof loginSchema>>({
