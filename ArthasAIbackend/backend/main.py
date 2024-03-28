@@ -4,6 +4,7 @@ import boto3
 import together
 import pickle  # For serialization
 from dotenv import load_dotenv
+from dependencies import numbers
 from storage import save_to_storage, load_from_storage, load_embeddings_from_s3, save_embeddings_to_s3
 from config import Settings
 import os
@@ -103,6 +104,10 @@ except HTTPException as e:
 
 if __name__ == "__main__":
     import uvicorn
+    import sys
+    import os
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+    from backend.config import settings   
     uvicorn.run(app, host="0.0.0.0", port=8000)
 
 
