@@ -35,6 +35,7 @@
     "react-hook-form": "^7.51.0",
     "react-icons": "^5.0.1",
     "react-markdown": "^9.0.1",
+    "react-query": "^3.39.3",
     "react-resizable-panels": "^2.0.12",
     "reactflow": "^11.10.4",
     "rehype-katex": "^7.0.0",

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import {useQuery, QueryClient, QueryClientProvider } from 'react-query';
 
 const ConvertMarkdownToLatexComponent = () => {
   const markdownContent = `
@@ -21,25 +20,18 @@ In this paper, we have presented RAPTOR, a novel tree-based retrieval system tha
 Table 8: Performance of RAPTOR when querying different tree layers for Story 1 from the QuALITY dataset. Columns represent different starting points (highest layer) and rows represent different numbers of layers queried.
  `;
 
+ const queryClient = new QueryClient();
 
-  async function convertMarkdownToLatex(markdown: any) {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/markdownConversion",
-        {
-          markdownContent: markdown,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+ const getConversion = async () => {
+  const res = await fetch('api/test/markdownConversion')
+  return res.json()
+}
 
-      return response.data.latex; // axios response
-    } catch (error) {
-      console.error("Error converting markdown to LaTeX:", error);
-      throw error;
+async function getConversionData(markdown: any) {
+    try{
+      const {data, error, isLoading} = useQuery('textConversion', getConversion)
+    } catch (error){
+      console.error('Error getting data:', error)
     }
-  }
-};
+  };
+}
